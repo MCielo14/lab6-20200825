@@ -1,7 +1,7 @@
 package Servlets;
 
 import Beans.Reproduccion;
-import Daos.ReproduccionDao;
+import Daos.CancionesDao;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -13,10 +13,9 @@ public class ServletListaRecomendados extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
-        ReproduccionDao reproduccionDao = new Reproduccion();
-        request.setAttribute("lista",reproduccionDao.listaReproduccion());
-        RequestDispatcher requestDispatcher =
-                request.getRequestDispatcher("employee/lista.jsp");
+        CancionesDao cancionesDao = new CancionesDao();
+        request.setAttribute("listaRecomendados",cancionesDao.listarecomendados());
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("listarecomendaciones.jsp");
         requestDispatcher.forward(request,response);
     }
 
