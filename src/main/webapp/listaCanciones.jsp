@@ -7,10 +7,10 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="Beans.Cancion" %>
-<jsp:useBean type="java.util.ArrayList<Beans.Cancion>" scope="request" id="lista1"/>
+<jsp:useBean type="java.util.ArrayList<Beans.Cancion>" scope="request" id="listaidBanda"/>
 <html>
     <jsp:include page="/static/head.jsp">
-        <jsp:param name="title" value="Lista de Cancione"/>
+        <jsp:param name="title" value="Lista de Canciones por Banda"/>
     </jsp:include>
     <body>
         <div class='container'>
@@ -20,7 +20,8 @@
 
             <div class="pb-5 pt-4 px-3 titlecolor">
                 <div class="col-lg-6">
-                    <h1 class='text-light'>Lista de canciones</h1>
+                    <h1 class='text-light'>Lista de canciones por banda</h1>
+                    <a class="btn btn-warning" href="ServletListaCanciones">Mostrar todas las canciones</a>
                 </div>
             </div>
 
@@ -32,7 +33,7 @@
                         <th>BANDA</th>
                     </thead>
                     <%
-                        for (Cancion cancion : lista1 ) {
+                        for (Cancion cancion : listaidBanda ) {
                     %>
                     <tr>
                         <td><%=cancion.getIdcancion()%>

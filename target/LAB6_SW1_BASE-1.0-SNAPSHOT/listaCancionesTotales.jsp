@@ -9,7 +9,7 @@
 <%@ page import="Beans.Tour" %>
 <%@ page import="Beans.Cancion" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean type="java.util.ArrayList<Beans.Cancion>" scope="request" id="listaCanciones"/>
+<jsp:useBean type="java.util.ArrayList<Beans.Cancion>" scope="request" id="lista1"/>
 <html>
   <jsp:include page="/static/head.jsp">
     <jsp:param name="title" value="Lista de Canciones por banda"/>
@@ -24,6 +24,7 @@
           <h1 class='text-light'>Lista canciones por banda</h1>
         </div>
       </div>
+
       <div class="tabla">
         <table class="table table-dark table-transparent table-hover">
           <thead>
@@ -32,7 +33,7 @@
             <th>BANDA</th>
           </thead>
           <%
-            for (Cancion cancion : listaCanciones) {
+            for (Cancion cancion : lista1) {
           %>
           <tr>
             <td><%=cancion.getIdcancion()%>
@@ -49,7 +50,6 @@
 
         </table>
       </div>
-
     </div>
     <jsp:include page="/static/scripts.jsp"/>
   </body>
