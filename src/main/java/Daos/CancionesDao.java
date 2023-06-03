@@ -42,5 +42,34 @@ public class CancionesDao {
         }
         return listarecomendados1;
     }
+    public ArrayList<Cancion> listaidBanda(String banda){
+        ArrayList<Cancion> listaidBanda = new ArrayList<>();
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        String sql = "SELECT *FROM cancion where banda =? ";
+        String url = "jdbc:mysql://localhost:3306/lab6sw1";
+        try (Connection connection = DriverManager.getConnection(url, "root", "root");
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+            preparedStatement.setString(1, banda);
+
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+                if (rs.next()) {
+                    Cancion cancion = new Cancion();
+                    cancion.setIdcancion(rs.getInt(1));
+                    cancion.setNombre_cancion(rs.getString(2));
+                    cancion.setBanda(rs.getString(3));
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return listaidBanda;
+    }
+
 }
 
