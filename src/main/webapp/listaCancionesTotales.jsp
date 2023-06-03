@@ -12,7 +12,7 @@
 <jsp:useBean type="java.util.ArrayList<Beans.Cancion>" scope="request" id="lista1"/>
 <html>
   <jsp:include page="/static/head.jsp">
-    <jsp:param name="title" value="Lista de Canciones por banda"/>
+    <jsp:param name="title" value="Lista de Canciones"/>
   </jsp:include>
   <body>
     <div class='container'>
