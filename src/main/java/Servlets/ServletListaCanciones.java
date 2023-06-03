@@ -15,16 +15,17 @@ public class ServletListaCanciones extends HttpServlet {
         CancionesDao cancionesDao = new CancionesDao();
 
 
-        String action = request.getParameter("a") == null ? "lista1" : request.getParameter("a");
+        String action = request.getParameter("p") == null ? "lista1" : request.getParameter("p") ;
 
 
         switch (action) {
             case "lista1":
-                request.setAttribute("lista1", CancionesDao.listar());
-                request.getRequestDispatcher("jobs/lista.jsp").forward(request, response);
+                request.setAttribute("lista1", cancionesDao.listatotalCanciones());
+                request.getRequestDispatcher("listaCanciones.jsp").forward(request, response);
                 break;
-            case "crear":
-                request.getRequestDispatcher("jobs/nuevo.jsp").forward(request, response);
+            case "FOB":
+                request.setAttribute("listaidBanda", cancionesDao.listaidBanda());
+                request.getRequestDispatcher("listaCancionesTotales.jsp").forward(request, response);
                 break;
 
         }

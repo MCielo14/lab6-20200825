@@ -42,33 +42,59 @@ public class CancionesDao {
         }
         return listarecomendados1;
     }
-    public ArrayList<Cancion> listaidBanda(String banda){
+    public ArrayList<Cancion> listaidBanda(){
         ArrayList<Cancion> listaidBanda = new ArrayList<>();
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        String sql = "SELECT *FROM cancion where banda =? ";
+        String sql = "SELECT *FROM cancion where banda =\"FOB\"  ";
         String url = "jdbc:mysql://localhost:3306/lab6sw1";
         try (Connection connection = DriverManager.getConnection(url, "root", "root");
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+             Statement stmt = connection.createStatement();
+             ResultSet resultSet = stmt.executeQuery(sql)) {
+            while(resultSet.next()){
 
-            preparedStatement.setString(1, banda);
-
-            try (ResultSet rs = preparedStatement.executeQuery()) {
-                if (rs.next()) {
-                    Cancion cancion = new Cancion();
-                    cancion.setIdcancion(rs.getInt(1));
-                    cancion.setNombre_cancion(rs.getString(2));
-                    cancion.setBanda(rs.getString(3));
-                }
+                Cancion cancion = new Cancion();
+                //reproduccion.setIdreproduccion(resultSet.getInt(1));
+                cancion.setIdcancion(resultSet.getInt(1));
+                cancion.setNombre_cancion(resultSet.getString(2));
+                cancion.setBanda(resultSet.getString(3));
+                listaidBanda.add(cancion);
             }
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return listaidBanda;
+    }
+    public ArrayList<Cancion> listatotalCanciones(){
+        ArrayList<Cancion> listatotalCanciones = new ArrayList<>();
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        String sql = "SELECT *\n" +
+                "FROM cancion";
+        String url = "jdbc:mysql://localhost:3306/lab6sw1";
+        try (Connection connection = DriverManager.getConnection(url, "root",
+                "root");
+             Statement stmt = connection.createStatement();
+             ResultSet resultSet = stmt.executeQuery(sql)) {
+            while(resultSet.next()){
+
+                Cancion cancion = new Cancion();
+                //reproduccion.setIdreproduccion(resultSet.getInt(1));
+                cancion.setIdcancion(resultSet.getInt(1));
+                cancion.setNombre_cancion(resultSet.getString(2));
+                cancion.setBanda(resultSet.getString(3));
+                listatotalCanciones.add(cancion);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return listatotalCanciones;
     }
 
 }
